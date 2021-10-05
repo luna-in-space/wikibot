@@ -18,26 +18,35 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('!w'):
-        a_string = message.content
-        new_string = a_string.replace ('!w ', '')
+    if message.content.startswith('!w '):
+        msg = message.content
+        new_msg = msg.replace ('!w ', '')
         
-        str1 = wikipedia.search(new_string, results = 1) 
-        if len(str1) == 0 :
+        wikisearch = wikipedia.search(new_msg, results = 1) 
+        if len(wikisearch) == 0 :
             await message.channel.send('No article found')
-        print(str1)
-        str2=str1[0] 
-        str3=f"https://en.wikipedia.org/wiki/{str2}" 
-        print(str2) 
+        print(wikisearch)
+        wikisearch0=wikisearch[0] 
+        url=f"https://en.wikipedia.org/wiki/{wikisearch0}" 
+        print(wikisearch0) 
+	#old way to find links, but bugged out upon disambiguation error
         #summary = wikipedia.summary(str2, sentences=5, auto_suggest=False)
         #url = wikipedia.page(str2, auto_suggest=False).url
         #await message.channel.send(url + '\n' +  summary)
         try:
-            summary = wikipedia.summary(str2, sentences=5, auto_suggest=False)
+            summary = wikipedia.summary(wikisearch0, sentences=1, auto_suggest=False)
         except wikipedia.DisambiguationError as err:
             await message.channel.send(err)
         else:
-            url = wikipedia.page(str2, auto_suggest=False).url
-            await message.channel.send(url + '\n' + summary)
+            url = wikipedia.page(wikisearch0, auto_suggest=False).url
+            await message.channel.send('<' + url + '>\n' + summary)
 
-client.run('#your token')
+
+
+    if message.content.startswith('!wk'):
+        op = message.content
+        nowk = op.replace ('!wk ', '')
+        wiktionary = ('https://en.wiktionary.org/wiki/' + nowk)
+        
+        await message.channel.send(nowk + "\n" +'<' +wiktionary + '>') 
+client.run('ODk0MjY5NDgxNDk1NDYxOTg5.YVnjWw.BQYwmxNm6sisGkDvcWtyStgjxa0')
