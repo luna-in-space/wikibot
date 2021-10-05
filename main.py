@@ -49,4 +49,4 @@ async def on_message(message):
         wiktionary = ('https://en.wiktionary.org/wiki/' + nowk)
         
         await message.channel.send(nowk + "\n" +'<' +wiktionary + '>') 
-client.run('ODk0MjY5NDgxNDk1NDYxOTg5.YVnjWw.BQYwmxNm6sisGkDvcWtyStgjxa0')
+client.run('token')
