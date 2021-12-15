@@ -46,6 +46,7 @@ async def on_message(message):
     if message.content.startswith('!wk'):
         op = message.content
         nowk = op.replace ('!wk ', '')
+        nospace = nowk.replace (' ', '_')
         wiktionary = ('https://en.wiktionary.org/wiki/' + nowk)
         
         await message.channel.send(nowk + "\n" +'<' +wiktionary + '>') 
